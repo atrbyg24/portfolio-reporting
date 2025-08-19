@@ -13,8 +13,13 @@ def analyze_performance(prices_df: pd.DataFrame, portfolio_df: pd.DataFrame) -> 
     daily_returns = portfolio_history['Total'].pct_change().dropna()
 
     total_return = (portfolio_history['Total'].iloc[-1] / portfolio_history['Total'].iloc[0] - 1) * 100
-    annualized_volatility = daily_returns.std() * np.sqrt(252) * 100
-    sharpe_ratio = (daily_returns.mean() / daily_returns.std()) * np.sqrt(252)
+    std_dev = daily_returns.std()
+    annualized_volatility = std_dev * np.sqrt(252) * 100
+
+    if std_dev == 0:
+        sharpe_ratio = 0.0
+    else:
+        sharpe_ratio = (daily_returns.mean() / std_dev)) * np.sqrt(252)
 
     metrics = {
         'total_return': total_return,
