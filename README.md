@@ -41,4 +41,4 @@ A Python-based tool that analyzes a stock portfolio's performance and generates 
     A report named `Financial_Report.pdf` will be generated in the root directory.
 
 ## Example Output
-[Example Report Screenshot](example.png)
+![Example Report Screenshot](example.png)
