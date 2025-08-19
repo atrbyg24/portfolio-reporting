@@ -19,7 +19,7 @@ def analyze_performance(prices_df: pd.DataFrame, portfolio_df: pd.DataFrame) -> 
     if std_dev == 0:
         sharpe_ratio = 0.0
     else:
-        sharpe_ratio = (daily_returns.mean() / std_dev)) * np.sqrt(252)
+        sharpe_ratio = (daily_returns.mean() / std_dev) * np.sqrt(252)
 
     metrics = {
         'total_return': total_return,
