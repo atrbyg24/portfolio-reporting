@@ -42,4 +42,4 @@ A Python-based tool that analyzes a stock portfolio's performance and generates 
 
 ## Example Output
 *(Include a screenshot of your generated PDF report here!)*
-![Example Report Screenshot](https://your-image-host.com/report_screenshot.png)
+![Example Report Screenshot](example.png)
