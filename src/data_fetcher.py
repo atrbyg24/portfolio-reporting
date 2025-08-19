@@ -10,7 +10,7 @@ def fetch_data(portfolio_df: pd.DataFrame, start_date: str, end_date: str) -> pd
     
     print(f"Fetching data for tickers: {', '.join(tickers)}...")
     
-    prices = yf.download(tickers, start=start_date, end=end_date)['Adj Close']
+    prices = yf.download(tickers, start=start_date, end=end_date)['Close']
     
     prices.ffill(inplace=True)
     
