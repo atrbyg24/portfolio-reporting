@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-def analyze_performance(prices_df: pd.DataFrame, portfolio_df: pd.DataFram, confidence_level: float=0.95) -> dict:
+def analyze_performance(prices_df: pd.DataFrame, portfolio_df: pd.DataFrame) -> dict:
     """
     Calculates key performance metrics for the portfolio, including
     total current value and historical Value at Risk (VaR).
@@ -9,12 +9,12 @@ def analyze_performance(prices_df: pd.DataFrame, portfolio_df: pd.DataFram, conf
     Args:
         prices_df (pd.DataFrame): DataFrame of historical prices for each ticker.
         portfolio_df (pd.DataFrame): DataFrame with 'Ticker' and 'Shares' columns.
-        confidence_level (float): The confidence level for VaR calculation (e.g., 0.95 for 95%).
-
     Returns:
         dict: A dictionary containing the calculated performance metrics.
     """
     
+    CONFIDENCE_LEVEL = 0.95
+
     portfolio_indexed = portfolio_df.set_index('Ticker')
     
     portfolio_history = prices_df * portfolio_indexed['Shares']
@@ -27,7 +27,7 @@ def analyze_performance(prices_df: pd.DataFrame, portfolio_df: pd.DataFram, conf
     total_return = (portfolio_history['Total'].iloc[-1] / portfolio_history['Total'].iloc[0] - 1) * 100
     std_dev = daily_returns.std()
     annualized_volatility = std_dev * np.sqrt(252) * 100
-    var_percentile = daily_returns.quantile(1 - confidence_level)
+    var_percentile = daily_returns.quantile(1 - CONFIDENCE_LEVEL)
     value_at_risk = abs(total_current_value * var_percentile)
 
     if std_dev == 0:
@@ -40,7 +40,7 @@ def analyze_performance(prices_df: pd.DataFrame, portfolio_df: pd.DataFram, conf
         'total_return_percent': total_return,
         'annualized_volatility': annualized_volatility,
         'sharpe_ratio': sharpe_ratio,
-        f'var_{int(confidence_level * 100)}': value_at_risk,
+        f'var_{int(CONFIDENCE_LEVEL * 100)}': value_at_risk,
         'portfolio_history': portfolio_history
     }
     
