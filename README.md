@@ -50,4 +50,4 @@ A Python-based tool that analyzes a stock portfolio's performance, compares it t
     A report named `Financial_Report.pdf` will be generated in the root directory, including portfolio metrics, benchmark comparison, alpha, beta, and a relative performance chart.
 
 ## Example Output
-![Example Report Screenshot](example.png)
+![Example Report Screenshot](report.png)
