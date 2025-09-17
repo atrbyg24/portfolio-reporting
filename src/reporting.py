@@ -34,11 +34,11 @@ def generate_report(metrics: dict, start_date: str, end_date: str, filename: str
     pdf.cell(0, 10, 'Key Performance Indicators:', 0, 1)
     pdf.set_font('Arial', '', 12)
     
-    pdf.cell(0, 8, f"   - Total Return: {metrics['total_current_value']:.2f}%", 0, 1)
+    pdf.cell(0, 8, f"   - Total Current Value: {metrics['total_current_value']:.2f}%", 0, 1)
     pdf.cell(0, 8, f"   - Total Return: {metrics['total_return_percent']:.2f}%", 0, 1)
     pdf.cell(0, 8, f"   - Annualized Volatility (Risk): {metrics['annualized_volatility']:.2f}%", 0, 1)
     pdf.cell(0, 8, f"   - Sharpe Ratio (Risk-Adjusted Return): {metrics['sharpe_ratio']:.2f}", 0, 1)
-    pdf.cell(0, 8, f"   - Total Return: {metrics[f'var_{int(confidence_level * 100)}']:.2f}%", 0, 1)
+    pdf.cell(0, 8, f"   - Value at Risk: {metrics['value_at_risk']:.2f}%", 0, 1)
     pdf.ln(10)
     
     pdf.image(chart_filename, x=None, y=None, w=180)

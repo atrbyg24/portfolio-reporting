@@ -40,7 +40,7 @@ def analyze_performance(prices_df: pd.DataFrame, portfolio_df: pd.DataFrame) -> 
         'total_return_percent': total_return,
         'annualized_volatility': annualized_volatility,
         'sharpe_ratio': sharpe_ratio,
-        f'var_{int(CONFIDENCE_LEVEL * 100)}': value_at_risk,
+        'value_at_risk': value_at_risk,
         'portfolio_history': portfolio_history
     }
     
