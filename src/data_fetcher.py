@@ -1,10 +1,25 @@
-# src/data_fetcher.py
-
 import pandas as pd
 import yfinance as yf
 
 def fetch_data(portfolio_df: pd.DataFrame, start_date: str, end_date: str) -> pd.DataFrame:
-    #Fetches historical adjusted close prices for tickers in the portfolio.
+    """
+    Fetch historical adjusted closing prices for a list of tickers.
+
+    Parameters
+    ----------
+    portfolio_df : pd.DataFrame
+        DataFrame containing a 'Ticker' column with stock ticker symbols.
+    start_date : str
+        Start date for fetching data (format: 'YYYY-MM-DD').
+    end_date : str
+        End date for fetching data (format: 'YYYY-MM-DD').
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame of adjusted closing prices indexed by date, 
+        with tickers as columns. Missing values are forward-filled.
+    """
 
     tickers = portfolio_df['Ticker'].tolist()
     

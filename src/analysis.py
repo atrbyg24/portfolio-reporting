@@ -3,15 +3,34 @@ import numpy as np
 
 def analyze_performance(prices_df: pd.DataFrame, portfolio_df: pd.DataFrame) -> dict:
     """
-    Calculates key performance metrics for the portfolio, including
-    total current value and historical Value at Risk (VaR).
-    
-    Args:
-        prices_df (pd.DataFrame): DataFrame of historical prices for each ticker.
-        portfolio_df (pd.DataFrame): DataFrame with 'Ticker' and 'Shares' columns.
-    Returns:
-        dict: A dictionary containing the calculated performance metrics.
+    Analyze portfolio performance based on historical price data and share allocations.
+
+    Parameters
+    ----------
+    prices_df : pd.DataFrame
+        DataFrame of adjusted closing prices for each ticker, indexed by date, with tickers as columns.
+    portfolio_df : pd.DataFrame
+        DataFrame containing portfolio holdings. Must include:
+            - 'Ticker' (str): Stock ticker symbol.
+            - 'Shares' (float or int): Number of shares held.
+
+    Returns
+    -------
+    dict
+        Dictionary of portfolio performance metrics:
+            - 'total_current_value' (float): Current portfolio value.
+            - 'total_return_percent' (float): Total return percentage over the period.
+            - 'annualized_volatility' (float): Annualized risk (volatility) as a percentage.
+            - 'sharpe_ratio' (float): Risk-adjusted return ratio.
+            - 'value_at_risk' (float): Value at Risk at 95% confidence level.
+            - 'portfolio_history' (pd.DataFrame): Portfolio value over time, including per-ticker contributions and a 'Total' column.
+
+    Notes
+    -----
+    - Assumes 252 trading days per year for annualized calculations.
+    - Value at Risk (VaR) is calculated using the historical simulation method at a 95% confidence level.
     """
+
     
     CONFIDENCE_LEVEL = 0.95
 

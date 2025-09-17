@@ -3,8 +3,34 @@ from fpdf import FPDF
 import os
 
 def generate_report(metrics: dict, start_date: str, end_date: str, filename: str = "Financial_Report.pdf"):
-    #Generates a PDF report with performance metrics and a chart.
-    
+    """
+    Generate a PDF report summarizing portfolio performance metrics and 
+    including a chart of portfolio value over time.
+
+    Parameters
+    ----------
+    metrics : dict
+        Dictionary of performance results containing:
+            - 'portfolio_history' (pd.DataFrame): Historical portfolio values with a 'Total' column.
+            - 'total_current_value' (float): Latest portfolio value.
+            - 'total_return_percent' (float): Total return percentage.
+            - 'annualized_volatility' (float): Annualized risk (volatility).
+            - 'sharpe_ratio' (float): Risk-adjusted return ratio.
+            - 'value_at_risk' (float): Value at Risk estimate.
+    start_date : str
+        Start date of the analysis period (format: 'YYYY-MM-DD').
+    end_date : str
+        End date of the analysis period (format: 'YYYY-MM-DD').
+    filename : str, optional
+        Name of the output PDF file (default is "Financial_Report.pdf").
+
+    Returns
+    -------
+    None
+        A PDF report is saved to the specified filename. 
+        The function also removes temporary chart files and prints a confirmation message.
+    """
+
     portfolio_history = metrics['portfolio_history']
     
     plt.style.use('seaborn-v0_8-darkgrid')
@@ -34,11 +60,11 @@ def generate_report(metrics: dict, start_date: str, end_date: str, filename: str
     pdf.cell(0, 10, 'Key Performance Indicators:', 0, 1)
     pdf.set_font('Arial', '', 12)
     
-    pdf.cell(0, 8, f"   - Total Current Value: {metrics['total_current_value']:.2f}%", 0, 1)
+    pdf.cell(0, 8, f"   - Total Current Value: {metrics['total_current_value']:.2f}", 0, 1)
     pdf.cell(0, 8, f"   - Total Return: {metrics['total_return_percent']:.2f}%", 0, 1)
     pdf.cell(0, 8, f"   - Annualized Volatility (Risk): {metrics['annualized_volatility']:.2f}%", 0, 1)
     pdf.cell(0, 8, f"   - Sharpe Ratio (Risk-Adjusted Return): {metrics['sharpe_ratio']:.2f}", 0, 1)
-    pdf.cell(0, 8, f"   - Value at Risk: {metrics['value_at_risk']:.2f}%", 0, 1)
+    pdf.cell(0, 8, f"   - Value at Risk: {metrics['value_at_risk']:.2f}", 0, 1)
     pdf.ln(10)
     
     pdf.image(chart_filename, x=None, y=None, w=180)
