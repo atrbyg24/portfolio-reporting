@@ -3,7 +3,7 @@ import yfinance as yf
 
 def fetch_data(portfolio_df: pd.DataFrame, start_date: str, end_date: str) -> pd.DataFrame:
     """
-    Fetch historical adjusted closing prices for a list of tickers.
+    Fetch historical adjusted closing prices for a list of tickers and S&P 500 (^GSPC) as a benchmark.
 
     Parameters
     ----------
@@ -22,6 +22,7 @@ def fetch_data(portfolio_df: pd.DataFrame, start_date: str, end_date: str) -> pd
     """
 
     tickers = portfolio_df['Ticker'].tolist()
+    tickers.append("^GSPC")
     
     print(f"Fetching data for tickers: {', '.join(tickers)}...")
     
